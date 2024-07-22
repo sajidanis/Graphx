@@ -8,32 +8,34 @@
 #include <memory>
 #include <functional>
 
+#include "EdgeData.h"
+
 // Generic Node class template
 template <typename T>
 class Edge {
 private:
-    unsigned long long id = 0;
+    uid_t id = 0;
     T u;
     T v;
-    double edgeWeight;
+    EdgeData edgeData;
 
 public:
-    explicit Edge(T u, T v, double weight) : id(reinterpret_cast<unsigned long long>(this)), u(u), v(v), edgeWeight(weight) {}
+    explicit Edge(T u, T v, const EdgeData ed) : id(reinterpret_cast<uid_t>(this)), u(u), v(v), edgeData(ed) {}
 
     bool operator==(const Edge& other) const {
-        return u == other.u and v == other.v and edgeWeight == other.edgeWeight;
+        return u == other.u and v == other.v and edgeData == other.edgeData;
     }
 
     bool operator!=(const Edge& other) const {
-        return u != other.u or v != other.v or edgeWeight != other.edgeWeight;
+        return u != other.u or v != other.v or edgeData != other.edgeData;
     }
 
     bool operator<(const Edge& other) const {
-        return edgeWeight < other.edgeWeight;
+        return edgeData < other.edgeData;
     }
 
     bool operator<=(const Edge& other) const {
-        return edgeWeight <= other.edgeWeight;
+        return edgeData <= other.edgeData;
     }
 };
 
