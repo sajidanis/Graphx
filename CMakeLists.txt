@@ -32,6 +32,7 @@ include_directories(${CMAKE_SOURCE_DIR}/Node)
 include_directories(${CMAKE_SOURCE_DIR}/DataStructures)
 include_directories(${CMAKE_SOURCE_DIR}/util)
 include_directories(${CMAKE_SOURCE_DIR}/Graph)
+include_directories(${CMAKE_SOURCE_DIR}/Algorithms)
 
 # Add source files
 add_executable(Graphx
