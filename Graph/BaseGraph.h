@@ -37,6 +37,14 @@ public:
         return nodeMappings.at(id);
     }
 
+    std::unordered_map<T, std::shared_ptr<Node<T>>> getNodeMappings() const {
+        return this->nodeMappings;
+    }
+
+    [[nodiscard]] size_t getNodes() const{
+        return this->nodes;
+    }
+
     bool hasNode(T id) const {
         return nodeMappings.contains(id);
     }

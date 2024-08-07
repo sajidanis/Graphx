@@ -2,8 +2,8 @@
 #include <memory>
 
 #include "BaseGraph.h"
+#include "PageRank.h"
 #include "SimpleGraph.h"
-#include "Algorithms/BFS.h"
 #include "Algorithms/DFS.h"
 
 int main() {
@@ -17,6 +17,13 @@ int main() {
 
     std::cout << "\n";
     dfs<int>(*graph, 1);
+
+    std::cout << "\n***************************\n";
+
+    for(auto &[k, val] : pageRank(*graph))
+    {
+        std::cout << "Key : " << k << " --> [ " << val << " ]\n";
+    }
 
     return 0;
 }

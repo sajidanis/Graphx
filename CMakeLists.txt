@@ -48,4 +48,6 @@ add_executable(Graphx
         Node/EdgeData.h
         Algorithms/BFS.h
         Algorithms/DFS.h
+        Algorithms/SSSP.h
+        Algorithms/PageRank.h
 )

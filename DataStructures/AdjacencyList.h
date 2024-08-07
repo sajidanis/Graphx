@@ -15,7 +15,8 @@
 #include <iostream>
 
 template <typename T>
-class AdjacencyList : public BaseStructure<T> {
+class AdjacencyList : public BaseStructure<T>
+{
 private:
     std::unordered_map<std::shared_ptr<Node<T>>, std::unordered_set<std::shared_ptr<Node<T>>, NodeHasher<T>>, NodeHasher<T>> adjacencyList;
     // std::unordered_set<std::shared_ptr<Edge<T>>, EdgeHasher<T>> edges;
@@ -74,6 +75,10 @@ public:
             neighbours.emplace_back(neighbour, edgeMappings.at({u, neighbour}));
         }
         return neighbours;
+    }
+
+    size_t getOutbounds(std::shared_ptr<Node<T>> u) const override {
+        return adjacencyList.at(u).size();
     }
 
     void display() const override {
