@@ -53,6 +53,14 @@ public:
         return repr.get();
     }
 
+    [[nodiscard]] bool isDirectedGraph() const {
+        return this->isDirected;
+    }
+
+    [[nodiscard]] bool isWeightedGraph() const {
+        return this->isWeighted;
+    }
+
     void display() const {
         std::cout << "===================Graph Output==================" << std::endl;
         for (const auto& [key, node] : nodeMappings) {

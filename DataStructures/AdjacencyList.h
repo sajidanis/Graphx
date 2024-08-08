@@ -9,10 +9,11 @@
 
 #include "BaseStructure.h"
 
+#include <iostream>
+#include <memory>
+#include <stdexcept>
 #include <unordered_map>
 #include <unordered_set>
-#include <stdexcept>
-#include <iostream>
 
 template <typename T>
 class AdjacencyList : public BaseStructure<T>
@@ -54,7 +55,7 @@ public:
     }
 
     void removeEdge(std::shared_ptr<Node<T>> u, std::shared_ptr<Node<T>> v) override {
-        if(!adjacencyList.contains(u) || !adjacencyList[u].contains(v)) {
+        if(!adjacencyList.contains(u) || !adjacencyList.at(u).contains(v)) {
             throw std::runtime_error("Edge does not exist in the graph");
         }
         adjacencyList[u].erase(v);
@@ -62,8 +63,8 @@ public:
         --this->numberOfEdges;
     }
 
-    bool hasEdge(std::shared_ptr<Node<T>> u, std::shared_ptr<Node<T>> v) override {
-        if(adjacencyList.contains(u) and adjacencyList[u].contains(v)) {
+    bool hasEdge(std::shared_ptr<Node<T>> u, std::shared_ptr<Node<T>> v) const override {
+        if(adjacencyList.contains(u) and adjacencyList.at(u).contains(v)) {
             return true;
         }
         return false;
@@ -79,6 +80,10 @@ public:
 
     size_t getOutbounds(std::shared_ptr<Node<T>> u) const override {
         return adjacencyList.at(u).size();
+    }
+
+    [[nodiscard]] std::unordered_map<std::pair<std::shared_ptr<Node<T>>, std::shared_ptr<Node<T>>>, std::shared_ptr<EdgeData>, PairHash<T>, PairEqual<T>> getEdges() const override {
+        return this->edgeMappings;
     }
 
     void display() const override {

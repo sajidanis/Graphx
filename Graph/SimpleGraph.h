@@ -21,7 +21,7 @@ public:
         const GraphRepresentation repr,
         size_t nodes = 0,
         bool isDirected = true,
-        bool isWeighted = false
+        bool isWeighted = true
 
     ) {
         if(repr == GraphRepresentation::ADJACENCY_MATRIX and nodes <= 0) {
@@ -51,9 +51,10 @@ auto SimpleGraph<T>::addEdge(T u, T v, std::shared_ptr<EdgeData> ed) -> void {
 
     // add the edge
     this->repr->addEdge(this->nodeMappings[u], this->nodeMappings[v], ed);
-
+    ++this->edges;
     if(!this->isDirected) {
         this->repr->addEdge(this->nodeMappings[v], this->nodeMappings[u], ed);
+        ++this->edges;
     }
 }
 
@@ -63,6 +64,7 @@ auto SimpleGraph<T>::removeEdge(T u, T v) -> void {
     if(!this->isDirected) {
         this->repr->removeEdge(this->nodeMappings[v], this->nodeMappings[u]);
     }
+    --this->edges;
 }
 
 #endif //SIMPLEGRAPH_H

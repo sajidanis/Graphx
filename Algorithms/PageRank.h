@@ -11,7 +11,7 @@ template <typename T>
 std::unordered_map<T, double> pageRank(const BaseGraph<T> &graph, float damping=0.85, const int max_iter = 100, const double epsilon = 1e-6) {
     std::unordered_map<T, double> pr_map;
     const size_t numNodes = graph.getNodes();
-    double maxChange = 0.0;
+    double diff = 0.0;
     auto nodeMappings = graph.getNodeMappings();
     auto repr = graph.getRepr();
     // Create an initial pr_map
@@ -26,7 +26,7 @@ std::unordered_map<T, double> pageRank(const BaseGraph<T> &graph, float damping=
             size_t outlink = neighbours.size();
             if(outlink == 0) {
                 for(auto &[k, val] : pr_map) {
-                    new_pr_map[k] = damping * pr_map[key] * numNodes;
+                    new_pr_map[k] = damping * pr_map[key] / numNodes;
                 }
             } else {
                 const double distributePr = pr_map[key] / outlink;
@@ -38,12 +38,12 @@ std::unordered_map<T, double> pageRank(const BaseGraph<T> &graph, float damping=
         }
 
         for (auto &[k, _] : nodeMappings) {
-            maxChange = std::max(maxChange, static_cast<double>(std::abs(new_pr_map[k] - pr_map[k])));
+            diff += static_cast<double>(std::abs(new_pr_map[k] - pr_map[k]));
         }
 
         pr_map = new_pr_map;
 
-        if(maxChange < epsilon) {
+        if(diff < epsilon) {
             std::cout << "\n[+] Converged after : " << iter + 1 << " iterations.\n";
             break;
         }

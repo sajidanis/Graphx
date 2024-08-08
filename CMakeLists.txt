@@ -50,4 +50,6 @@ add_executable(Graphx
         Algorithms/DFS.h
         Algorithms/SSSP.h
         Algorithms/PageRank.h
+        util/Constants.h
+        Algorithms/TriangleCounting.h
 )
