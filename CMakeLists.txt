@@ -52,4 +52,5 @@ add_executable(Graphx
         Algorithms/PageRank.h
         util/Constants.h
         Algorithms/TriangleCounting.h
+        Algorithms/Color.h
 )
