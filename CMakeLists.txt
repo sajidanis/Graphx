@@ -53,4 +53,5 @@ add_executable(Graphx
         util/Constants.h
         Algorithms/TriangleCounting.h
         Algorithms/Color.h
+        Algorithms/MIS.cpp.h
 )
