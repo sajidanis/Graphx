@@ -78,7 +78,7 @@ public:
         return neighbours;
     }
 
-    size_t getOutbounds(std::shared_ptr<Node<T>> u) const override {
+    size_t getOutdegree(std::shared_ptr<Node<T>> u) const override {
         return adjacencyList.at(u).size();
     }
 

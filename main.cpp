@@ -3,6 +3,8 @@
 
 #include "Algorithms/DFS.h"
 #include "BaseGraph.h"
+#include "Color.h"
+#include "MIS.cpp.h"
 #include "PageRank.h"
 #include "SSSP.h"
 #include "SimpleGraph.h"
@@ -32,13 +34,26 @@ int main() {
     }
 
     std::cout << "\n***************************\nSSSP \n";
-    auto res = bellmanFord<int>(*graph, 1);
+    auto sssp = bellmanFord<int>(*graph, 1);
 
-    for(auto &[k, val] : res) {
+    for(auto &[k, val] : sssp) {
         std::cout << "Key : " << k << " --> [ " << val << " ]\n";
     }
 
     std::cout << "\n***************************\nTriangle counting \n";
-    std::cout << "Total triangle count: " << tc(*graph) << "\n";
+    std::cout << "Total triangle count: " << tc<int>(*graph) << "\n";
+
+
+    std::cout << "\n***************************\nGraph Coloring \n";
+    for (auto colors = color<int>(*graph); auto &[k, val] : colors) {
+        std::cout << "Key : " << k << " --> [ " << val << " ]\n";
+    }
+
+    std::cout << "\n***************************\nMaximal Independent State\nIndependent Set --> ";
+    for (const auto v : mis<int>(*graph)) {
+        std::cout << v << " ";
+    }
+    std::cout << "\n";
+
     return 0;
 }

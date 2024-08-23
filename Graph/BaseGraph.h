@@ -37,6 +37,15 @@ public:
         return nodeMappings.at(id);
     }
 
+    std::vector<std::pair<int,T>> getValency() const {
+         std::vector<std::pair<int,T>> valency;
+
+        for(auto &[id, node] : this->nodeMappings) {
+            valency.push_back({this->repr->getOutdegree(node), id});
+        }
+        return valency;
+    }
+
     std::unordered_map<T, std::shared_ptr<Node<T>>> getNodeMappings() const {
         return this->nodeMappings;
     }

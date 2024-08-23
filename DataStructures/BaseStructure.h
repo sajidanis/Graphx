@@ -33,7 +33,7 @@ public:
 
     virtual std::vector<std::pair<std::shared_ptr<Node<T>>, std::shared_ptr<EdgeData>>> getNeighbours(std::shared_ptr<Node<T>> u) const = 0;
 
-    virtual size_t getOutbounds(std::shared_ptr<Node<T>> u) const = 0;
+    virtual size_t getOutdegree(std::shared_ptr<Node<T>> u) const = 0;
 
     virtual void display() const = 0;
 
